@@ -1,27 +1,31 @@
-const form = document.getElementById("contactForm");
+document.addEventListener("DOMContentLoaded", () => {
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
+  const form = document.getElementById("contactForm");
 
-  const data = {
-    name: document.getElementById("name").value,
-    email: document.getElementById("email").value,
-    message: document.getElementById("message").value
-  };
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-  try {
-    const res = await fetch("https://portfolio-backend-c76b.onrender.com/contact", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    });
+    const data = {
+      name: document.getElementById("name").value,
+      email: document.getElementById("email").value,
+      message: document.getElementById("message").value
+    };
 
-    const text = await res.text();
-    document.getElementById("status").innerText = text;
+    try {
+      const res = await fetch("https://portfolio-backend-c76b.onrender.com/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
 
-  } catch (err) {
-    document.getElementById("status").innerText = "Error sending message";
-  }
+      const text = await res.text();
+      document.getElementById("status").innerText = text;
+
+    } catch (err) {
+      document.getElementById("status").innerText = "Error sending message";
+    }
+  });
+
 });
